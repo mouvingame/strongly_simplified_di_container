@@ -19,9 +19,29 @@ public class InjectorImpl implements Injector {
     private Map<Class<?>, Class<?>> bindingMap = new HashMap<>();
     private Map<Class<?>, Constructor<?>> injectionMap = new HashMap<>();
 
+    private Object createThrough(Constructor<?> constructor) throws Exception {
+        int parameterCount = constructor.getParameterCount();
+        if (parameterCount == 0) return constructor.newInstance();
+
+        Object[] injected = new Object[parameterCount];
+        Class<?>[] parameterTypes = constructor.getParameterTypes();
+
+        for (int i = 0; i < parameterCount; i++) {
+            Constructor<?> parameterConstructor = injectionMap.get(parameterTypes[i]);
+            injected[i] = createThrough(parameterConstructor);
+        }
+
+        return constructor.newInstance(injected);
+    }
+
     @Override
-    public <T> Provider<T> getProvider(Class<T> type) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public <T> Provider<T> getProvider(Class<T> type) throws Exception {
+        Objects.requireNonNull(type);
+        if (!injectionMap.containsKey(type)) return null;
+        Constructor<?> constructor = injectionMap.get(type);
+        T created = (T) createThrough(constructor);
+        return () -> created;
     }
 
     @Override

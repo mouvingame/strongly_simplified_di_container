@@ -12,9 +12,10 @@ public interface Injector {
      * Provides provider for a created instance of type T
      * @param type class instance for chosen type
      * @param <T> type of instance that will be created by this injector
-     * @return provider that encapsulates created instance of type T, if injector can create instance, otherwise null
+     * @return provider that encapsulates created instance of type T, if injector can create instance, else null
+     * @throws Exception if injector cannot create instance
      */
-    <T> Provider<T> getProvider(Class<T> type);
+    <T> Provider<T> getProvider(Class<T> type) throws Exception;
 
     /**
      * Binds interface type and implementation type between themselves
