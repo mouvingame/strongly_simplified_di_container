@@ -11,4 +11,12 @@ public class SingleInjectConstructorImpl implements SingleInjectConstructorIntf 
     public SingleInjectConstructorImpl(DefaultConstructorIntf defaultConstructorIntf) {
         this.defaultConstructorIntf = defaultConstructorIntf;
     }
+
+    public DefaultConstructorIntf getDefaultConstructorIntf() {
+        return defaultConstructorIntf;
+    }
+
+    public void setDefaultConstructorIntf(DefaultConstructorIntf defaultConstructorIntf) {
+        this.defaultConstructorIntf = defaultConstructorIntf;
+    }
 }

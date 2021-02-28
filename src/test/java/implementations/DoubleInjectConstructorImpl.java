@@ -15,4 +15,20 @@ public class DoubleInjectConstructorImpl implements DoubleInjectConstructorIntf 
         this.singleInjectConstructorIntf = singleInjectConstructorIntf;
         this.defaultConstructorIntf = defaultConstructorIntf;
     }
+
+    public SingleInjectConstructorIntf getSingleInjectConstructorIntf() {
+        return singleInjectConstructorIntf;
+    }
+
+    public void setSingleInjectConstructorIntf(SingleInjectConstructorIntf singleInjectConstructorIntf) {
+        this.singleInjectConstructorIntf = singleInjectConstructorIntf;
+    }
+
+    public DefaultConstructorIntf getDefaultConstructorIntf() {
+        return defaultConstructorIntf;
+    }
+
+    public void setDefaultConstructorIntf(DefaultConstructorIntf defaultConstructorIntf) {
+        this.defaultConstructorIntf = defaultConstructorIntf;
+    }
 }

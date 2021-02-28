@@ -18,12 +18,20 @@ public interface Injector {
     <T> Provider<T> getProvider(Class<T> type) throws Exception;
 
     /**
-     * Binds interface type and implementation type between themselves
+     * Binds interface type and implementation type between themselves for prototype instance creating
      * @param intfType class instance for chosen interface type
      * @param implType class instance for some interface implementation type
-     * @param <T> type of interface that implementation instance will be created by this injector
+     * @param <T> type of interface that prototype implementation instances will be created by this injector
      */
     <T> void bind(Class<T> intfType, Class<? extends T> implType);
+
+    /**
+     * Binds interface type and implementation type between themselves for singleton instance creating
+     * @param intfType class instance for chosen interface type
+     * @param implType class instance for some interface implementation type
+     * @param <T> type of interface that singleton implementation instance will be created by this injector
+     */
+    <T> void bindSingleton(Class<T> intfType, Class<? extends T> implType);
 
     /**
      * Should be called after binding. Injector will check a possibility of creating implementation instances and

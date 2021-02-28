@@ -22,7 +22,7 @@ public class ExceptionsTest {
             Injector injector = new InjectorImpl();
             injector.bind(ManyInjectConstructorsIntf.class, ManyInjectConstructorsImpl.class);
             injector.checkBindings();
-            Assert.fail("Should be throwned instance of TooManyConstructorsException");
+            Assert.fail("Should be thrown instance of TooManyConstructorsException");
         } catch (TooManyConstructorsException tooMany) {
             tooMany.printStackTrace(System.out);
         }
@@ -34,7 +34,7 @@ public class ExceptionsTest {
             Injector injector = new InjectorImpl();
             injector.bind(NoInjectAndDefaultConstructorIntf.class, NoInjectAndDefaultConstructorImpl.class);
             injector.checkBindings();
-            Assert.fail("Should be throwned instance of ConstructorNotFoundException");
+            Assert.fail("Should be thrown instance of ConstructorNotFoundException");
         } catch (ConstructorNotFoundException constNotfound) {
             constNotfound.printStackTrace(System.out);
         }
@@ -46,9 +46,21 @@ public class ExceptionsTest {
             Injector injector = new InjectorImpl();
             injector.bind(SingleInjectConstructorIntf.class, SingleInjectConstructorImpl.class);
             injector.checkBindings();
-            Assert.fail("Should be throwned instance of BindingNotFoundException");
+            Assert.fail("Should be thrown instance of BindingNotFoundException");
         } catch (BindingNotFoundException bindNotFound) {
             bindNotFound.printStackTrace(System.out);
+        }
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        try {
+            Injector injector = new InjectorImpl();
+            injector.bindSingleton(SingleInjectConstructorIntf.class, SingleInjectConstructorImpl.class);
+            injector.bind(SingleInjectConstructorIntf.class, SingleInjectConstructorImpl.class);
+            Assert.fail("Should be thrown instance of IllegalArgumentException");
+        } catch (IllegalArgumentException illegal) {
+            illegal.printStackTrace(System.out);
         }
     }
 }
